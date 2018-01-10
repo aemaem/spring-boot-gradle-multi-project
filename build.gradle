@@ -12,7 +12,9 @@ buildscript {
 	}
 }
 
-allprojects {
+subprojects {
+	apply plugin: "java"
+	apply plugin: "org.springframework.boot"
 	apply plugin: "io.spring.dependency-management"
 
 	repositories {
@@ -21,60 +23,16 @@ allprojects {
 		maven { url "https://repo.spring.io/milestone" }
 	}
 
-	dependencyManagement {
-		dependencies {
-			// common
-			dependency("cglib:cglib-nodep:3.2.5")
-			dependency("org.apache.commons:commons-collections4:4.1")
-			dependency("net.bytebuddy:byte-buddy-dep:1.7.2")
-			dependency("javax.el:javax.el-api:3.0.0")
-			dependency("com.google.guava:guava:23.0")
-			dependency("org.projectlombok:lombok:1.16.18")
-			dependency("org.hibernate:hibernate-validator:5.2.2.Final")
-			dependency("org.yaml:snakeyaml:1.18")
-
-			// swagger
-			dependencySet(group: "io.springfox", version: "2.7.0") {
-				entry "springfox-swagger2"
-				entry "springfox-swagger-ui"
-			}
-
-			// zip
-			dependency("org.zeroturnaround:zt-zip:1.12")
-
-			// tests
-			dependency("at.mmair:test:1.1.0")
-			dependency("uk.co.jemos.podam:podam:7.1.0.RELEASE")
-			dependencySet(group: "org.spockframework", version: "1.1-groovy-2.4") {
-				entry "spock-core"
-				entry "spock-spring"
-			}
-		}
-	}
-}
-
-subprojects {
-	apply plugin: "java"
-	apply plugin: "org.springframework.boot"
-
 	dependencies {
-		compileOnly "org.projectlombok:lombok"
-
 		compile "org.springframework.boot:spring-boot-starter"
 		compile "org.springframework.boot:spring-boot-starter-actuator"
 
-		// tests
-		testCompile "at.mmair:test"
-		testCompile "org.springframework.boot:spring-boot-starter-test"
-		testCompile "org.codehaus.groovy:groovy-all"
-		testCompile "org.spockframework:spock-spring"
-		testCompile "org.spockframework:spock-core"
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+		testCompile('io.projectreactor:reactor-test')
 	}
 
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 
-	// disable boot repackage task for gradle build
-	// https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-gradle-plugin.html#build-tool-plugins-understanding-the-gradle-plugin
 	bootJar.enabled = false
 }

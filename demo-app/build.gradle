@@ -2,5 +2,6 @@ springBoot.mainClassName = "com.example.demo.app.DemoApplication"
 bootJar.enabled = true
 
 dependencies {
+    compile project(":demo-api")
     runtime project(":demo-service")
 }
