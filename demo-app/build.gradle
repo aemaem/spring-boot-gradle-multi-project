@@ -3,5 +3,4 @@ bootJar.enabled = true
 
 dependencies {
     compile project(":demo-api")
-    runtime project(":demo-service")
 }
