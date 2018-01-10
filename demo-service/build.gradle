@@ -1,5 +1,3 @@
 dependencies {
     compile project(':demo-api')
-
-    compile('org.springframework.boot:spring-boot-starter-webflux')
 }
