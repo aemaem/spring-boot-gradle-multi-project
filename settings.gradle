@@ -1,0 +1,3 @@
+include 'demo-api'
+include 'demo-service'
+include 'demo-app'
